@@ -28,11 +28,14 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
+    Counter1 is declared outside of the function where as counter2 is the function.
   
   2. Which of the two uses a closure? How can you tell?
+      Counter2 uses closure, it reaches outside of its scope to find the variable because that variable doesn't exist inside of the scope.
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+      Counter2 is used better with multiple functions where as counter1 is used better when dealing with its own scope.
 */
 
 // counter1 code
@@ -62,9 +65,10 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+    return Math.floor(Math.random()*3);
 }
+
 
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
@@ -81,8 +85,17 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function finalScore(callback, number){
+  let score = {
+    'Home': 0,
+    'Away': 0,
+  }
+  for (let i = 0; i >= number; i++){
+    score = {
+      'Home': callback() + score['Home'],
+      'Away': callback() + score['Away']}
+    }
+    return score
 }
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
@@ -90,9 +103,12 @@ Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
-}
+function getInningScore(callback) {
+  return {
+    'Home': callback(),
+    'Away': callback()}
+  }
+
 
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
@@ -136,8 +152,24 @@ Use the scoreboard function below to do the following:
 ]  
   */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(callback1, callback2, number) {
+  let score = [];
+  let counterHome = 0;
+  let counterAway = 0;
+  for (let i =0; i >= number; i++){
+    const result = callback1(callback2);
+    let string = 'Inning ${i}: Away ${result.Away} - Home ${result.Home}';
+    score.push(string);
+    counterHome = counterHome + result.Home;
+    counterAway = counterAway + result.Away;
+  }
+  if (counterHome === counterAway){
+    score.push('This game will require extra innings: Away ${result.Away} - Home ${result.Home}');
+    } else {
+      score.push('Final Score: Away ${counterAway} - Home ${counterHome}');
+    }
+
+  return score;
 }
 
 

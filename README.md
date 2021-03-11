@@ -43,6 +43,7 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+    A closure is how you can access to an outer funtion's scope from inside of another function.
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -64,8 +65,11 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+    The closure is console.log(`${name} rolled a ${newRoll}`) because it calls values from outside the function.
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+    The name is always stay the same while the value of the newRoll could change.
 c. What is the lexical scope of `newRoll`? 
+    function()
 
 
 ### Task 3 - Stretch Goals
